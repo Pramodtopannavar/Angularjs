@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="dateApp">
+
+<head>
+  <title>Date Display Application</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-controller="DateController">
+   <p>Name:Pramod Topannavar<br>
+USN:2AG21CS069</p>
+
+
+  <h2>Date Display</h2>
+
+  <p>Default Format: {{ currentDate | date }}</p>
+  <p>Short Date Format: {{ currentDate | date:'shortDate' }}</p>
+  <p>Medium Date Format: {{ currentDate | date:'mediumDate' }}</p>
+  <p>Full Date Format: {{ currentDate | date:'fullDate' }}</p>
+  <p>Custom Format: {{ currentDate | date:'yyyy-MM-dd HH:mm:ss' }}</p>
+
+  <script>
+    var app = angular.module('dateApp', []);
+
+    app.controller('DateController', function ($scope, $interval) {
+      // Update the date every second
+      $interval(function () {
+        $scope.currentDate = new Date();
+      }, 1000);
+    });
+  </script>
+
+</body>
+
+</html>

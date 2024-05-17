@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Search</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body ng-app="employeeApp" ng-controller="employeeController">
+<p>Name:Pramod Topannavar<br>
+USN:2AG21CS069</p>
+    <h2>Employee List</h2>
+
+    <label>Search by Name:</label>
+    <input type="text" ng-model="searchName"><br><br>
+    
+    <label>Search by Salary:</label>
+    <input type="number" ng-model="searchSalary"><br><br>
+
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Salary</th>
+        </tr>
+        <tr ng-repeat="employee in employees | filter:searchName | filter:customSalaryFilter">
+            <td>{{ employee.name }}</td>
+            <td>{{ employee.salary }}</td>
+        </tr>
+    </table>
+<script>
+var app = angular.module('employeeApp', []);
+
+app.controller('employeeController', function($scope) {
+    $scope.employees = [
+        { name: 'pramod', salary: 150000 },
+        { name: 'prakash', salary: 420420 },
+        { name: 'siddappa', salary: 270500 },
+        { name: 'pradeep', salary: 310500 }
+    ];
+
+    $scope.customSalaryFilter = function(employee) {
+        if (!$scope.searchSalary || employee.salary >= $scope.searchSalary) {
+            return true;
+        }
+        return false;
+    };
+});
+</script>
+</body>
+</html>
